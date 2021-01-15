@@ -1,0 +1,8 @@
+---
+- hosts: fe1:fe2
+  tasks:
+          - name: add repo node
+            shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+          - name: install node
+            apt:
+                    name: nodejs

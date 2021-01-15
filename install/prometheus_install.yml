@@ -1,0 +1,18 @@
+---
+- hosts: mn
+  tasks:
+          - name: mkdir docker file
+            file:
+                    path: /home/mn/prometheus
+                    state: directory
+
+          - name: copy prometheus config
+            copy:
+                    src: /home/as/ansible/prometheus.yml
+                    dest: /home/mn/prometheus/prometheus.yml
+
+          - name: run prometheus
+            command: docker run --name prometheus -p 9090:9090 -d -v /home/mn/prometheus:/etc/prometheus prom/prometheus
+
+          - name: run grafana
+            command: docker run -d --name grafana -p 3000:3000 grafana/grafana

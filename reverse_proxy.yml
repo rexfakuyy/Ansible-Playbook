@@ -1,0 +1,71 @@
+- hosts: nx
+  tasks:
+    - name: copy reverse proxy frontend
+      copy:
+        src: reverse/frontend.conf
+        dest: /etc/nginx/sites-available/frontend.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/frontend.conf
+        dest: /etc/nginx/sites-enabled/frontend.conf
+        state: link
+
+    - name: copy reverse proxy backend
+      copy:
+        src: reverse/backend.conf
+        dest: /etc/nginx/sites-available/backend.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/backend.conf
+        dest: /etc/nginx/sites-enabled/backend.conf
+        state: link
+
+    - name: copy reverse proxy jenkins
+      copy:
+        src: reverse/jenkins.conf
+        dest: /etc/nginx/sites-available/jenkins.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/jenkins.conf
+        dest: /etc/nginx/sites-enabled/jenkins.conf
+        state: link
+
+    - name: copy reverse proxy monitoring
+      copy:
+        src: reverse/monitoring.conf
+        dest: /etc/nginx/sites-available/monitoring.conf
+        owner: root
+        group: root
+        mode: 0644
+    - name: Enable site
+      file:
+        src: /etc/nginx/sites-available/monitoring.conf
+        dest: /etc/nginx/sites-enabled/monitoring.conf
+        state: link
+          
+#    - name: copy reverse proxy prometheus
+#      copy:
+#        src: reverse/prometheus.conf
+#        dest: /etc/nginx/sites-available/prometheus.conf
+#        owner: root
+#        group: root
+#        mode: 0644
+#    - name: Enable site
+#      file:
+#        src: /etc/nginx/sites-available/prometheus.conf
+#        dest: /etc/nginx/sites-enabled/prometheus.conf
+#        state: link
+
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

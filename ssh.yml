@@ -1,0 +1,17 @@
+- name: generate SSH key
+  hosts: all
+  vars:
+    ssh_key_filename: id_rsa_myproject
+  vars_prompt:
+    - name: "ssh_passphrase"
+      prompt: "Enter the passphrase for the SSH key"
+  tasks:
+    - name: generate SSH key "{{ssh_key_filename}}"
+      user:
+        name: "{{ansible_user}}"
+        generate_ssh_key: yes
+        ssh_key_type: rsa
+        ssh_key_bits: 4096
+        ssh_key_file: .ssh/{{ssh_key_filename}}
+        ssh_key_passphrase: "{{ssh_passphrase}}"
+        force: no

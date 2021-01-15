@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['172.31.2.43:9090']
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['172.31.3.101:9100','172.31.2.242:9100','172.31.2.46:9100','172.31.2.227:9100','172.31.2.35:9100','172.31.2.13:9100','172.31.2.43:9100']

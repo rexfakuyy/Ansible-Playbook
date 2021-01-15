@@ -1,0 +1,106 @@
+# Create new user 
+- hosts: nx
+  tasks:
+          - name: "create users nginx"
+            user:
+                    name: nx
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/nx
+
+- hosts: db
+  tasks:
+          - name: "create users database"
+            user:
+                    name: db
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/db
+
+- hosts: be
+  tasks:
+          - name: "create users backend"
+            user:
+                    name: be
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/be
+
+
+- hosts: fe
+  tasks:
+          - name: "create users frontend1"
+            user:
+                    name: fe1
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/fe1
+
+- hosts: fe2
+  tasks:
+          - name: "create users frontend2"
+            user:
+                    name: fe2
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/fe2
+
+- hosts: jk
+  tasks:
+          - name: "create users jenkins"
+            user:
+                    name: jk
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/jk
+
+- hosts: mn
+  tasks:
+          - name: "create users frontend2"
+            user:
+                    name: mn
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: present
+                    shell: /bin/bash
+                    system: no
+                    createhome: yes
+                    home: /home/fe2
+                    
+# Change PasswordAuthentication and rload sshd
+- hosts: all
+  tasks:
+          - name: change PasswordAuth
+            lineinfile:
+                    path: /etc/ssh/sshd_config
+                    regexp: 'PasswordAuthentication no'
+                    line: PasswordAuthentication yes
+
+          - name: reload sshd
+            systemd:
+                    name: sshd
+                    state: reloaded

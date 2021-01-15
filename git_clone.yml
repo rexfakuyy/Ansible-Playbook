@@ -1,0 +1,18 @@
+#- hosts: be
+#  tasks:
+#          - name: git clone
+#            git:
+#                    repo: git@github.com:rexfakuyy/bedumbways.git
+#                    version: production
+#                    dest: ~/bedumbways/
+#                    accept_hostkey: yes
+
+                    
+- hosts: fe2 
+  tasks:
+          - name: git clone
+            git:
+                    repo: git@github.com:rexfakuyy/fedumbways.git
+                    version: production
+                    dest: ~/fedumbways/
+#                    accept_hostkey: yes

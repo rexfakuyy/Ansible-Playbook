@@ -1,0 +1,4 @@
+- hosts: all
+  tasks:
+          - name: delete .ssh
+            command: rm -rf "/home/{{ansible_user}}/.ssh"

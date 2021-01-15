@@ -1,0 +1,12 @@
+certbot_site_names:
+    - recky.instructype.com
+    - api.recky.instructype.com
+    - cicd.recky.instructype.com
+#    - prometheus.recky.instructype.com
+    - monitoring.recky.instructype.com
+
+
+
+certbot_package: "python3-certbot-nginx"
+certbot_plugin: "nginx"
+certbot_mail_address: pramanaputrarecky@gmail.com

@@ -1,0 +1,27 @@
+nx ansible_host=172.31.3.101 ansible_user=nx
+fe1 ansible_host=172.31.2.242 ansible_user=fe1
+fe2 ansible_host=172.31.2.46 ansible_user=fe2
+be ansible_host=172.31.2.227 ansible_user=be
+jk ansible_host=172.31.2.35 ansible_user=jk
+db ansible_host=172.31.2.13 ansible_user=db
+mn ansible_host=172.31.2.43 ansible_user=mn
+
+[frontend]
+fe
+fe2
+
+[backend]
+be
+
+[docker]
+fe
+fe2
+be
+jk
+mn
+
+[all:vars]
+ansible_connection=ssh
+#ansible_user=ubuntu
+# Ubuntu uses python3 instead of python2, we need to set the interpreter for ansible
+ansible_python_interpreter=/usr/bin/python3

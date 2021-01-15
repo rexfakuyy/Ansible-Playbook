@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+          - name: "create universal user"
+            user:
+                    name: recky
+                    password: "$6$/qZ52ZrpX$pAFgm0pvSc6yFFF35UG4JVPh36ztwpIRJ29Ucw3tSaWSzKePyXIvxM6aiZ7RSG6vTZAlQUVXr922jBQb4F1TZ1"
+                    groups: sudo,docker
+                    state: absent
+                    shell: /bin/bash
+                    system: yes
+                    home: /home/recky
